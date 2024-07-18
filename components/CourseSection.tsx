@@ -1,10 +1,11 @@
 import React from "react";
-import Image from "next/image";
+import CourseCard from "./CourseCard";
+import Heading from "./Heading";
 import grammar from "../public/grammar.png";
 import speaking from "../public/speaking.png";
 import toefl from "../public/toefl.jpg";
 
-const CourseSection = () => {
+const CourseSection: React.FC = () => {
   const handleAlert = (courseName: string) => {
     alert(`${courseName} is still in progress!`);
   };
@@ -29,21 +30,18 @@ const CourseSection = () => {
 
   return (
     <section id="course" className="text-center p-8 bg-white">
-      <h2 className="text-2xl text-blue-900 font-roboto mb-4">Our Courses</h2>
+      <Heading level={2} className="text-2xl text-blue-900 font-roboto mb-4">
+        Our Courses
+      </Heading>
       <div className="flex justify-around flex-wrap">
         {courses.map((course) => (
-          <div
+          <CourseCard
             key={course.title}
-            className="bg-blue-200 border rounded-lg overflow-hidden shadow-lg w-1/3 m-4 transform hover:-translate-y-2 transition-transform"
-          >
-            <Image src={course.src} alt={course.alt} className="w-full" />
-            <h3
-              className="text-xl text-blue-900 font-roboto p-4 cursor-pointer"
-              onClick={() => handleAlert(course.title)}
-            >
-              {course.title}
-            </h3>
-          </div>
+            src={course.src}
+            alt={course.alt}
+            title={course.title}
+            onClick={() => handleAlert(course.title)}
+          />
         ))}
       </div>
     </section>
